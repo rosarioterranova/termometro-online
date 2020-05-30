@@ -1,7 +1,16 @@
-img{
-    height: 200px;
+.logo{
+    height: 100px;
 }
 
 body{
     background-color: whitesmoke;
+}
+
+.error{
+    color: red;
+}
+
+.spinner-border{
+    height: 100px;
+    width: 100px;
 }

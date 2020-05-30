@@ -3,7 +3,29 @@
 <div class="container my-5 text-center">
     <h1>Termometro Online</h1>
     {{>navbar}}
+
+    <img class="logo my-2" src="img/favicon.png" alt="">
+    
     <p>Misura in tempo reale quanti gradi ci sono nella tua città</p>
+    
+    <form onsubmit="return getData()">
+        <div class="row mx-5">
+            <div class="col-12 col-md-10">
+                <input id="city" type="text" class="form-control my-2">
+            </div>
+            <div class="col-12 col-md-2">
+                <button id="city-submit" class="btn btn-primary btn-block my-2">Invio</button>
+            </div>
+        </div>
+                
+        
+    </form>
+    
+    <div class="spinner-border my-5 d-none" role="status" id="loading-spinner">
+        <span class="sr-only">Caricamento...</span>
+    </div>
+
+    <div id="result" class="d-none"></div>
 </div>
 
 <script src="./js/app.js"></script>

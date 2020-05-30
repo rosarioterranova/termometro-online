@@ -20,29 +20,21 @@ app.get("/", (req, res) => {
 // about
 app.get("/about", (req, res) => {
     res.render("about", {
-        title: "About"
+        title: "Info"
     })
 })
 
 // help
 app.get("/help", (req, res) => {
     res.render("help", {
-        title: "Help"
-    })
-})
-
-// help not found
-app.get("/help/*", (req, res) => {
-    res.render("404", {
-        title: "404",
-        message: "Help article not found!"
+        title: "Aiuto"
     })
 })
 
 // weather (sending an object will send a JSON)
 app.get("/weather", (req, res) => {
     if(!req.query.address){
-        return res.send({ error: "Nessun indirizzo inserito" })
+        return res.send({ error: "Nessuna città inserita" })
     }
 
     weatherRequest.getWeather(req.query.address, (error, data) => {
@@ -61,7 +53,7 @@ app.get("/weather", (req, res) => {
 app.get("*", (req, res) => {
     res.render("404", {
         title: "404",
-        message: "Page not found!"
+        message: "Pagina non trovata!"
     })
 })
 

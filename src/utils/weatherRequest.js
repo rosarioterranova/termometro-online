@@ -11,7 +11,7 @@ const getWeather = (location, callback) => {
         if(error){
             callback("Errore nella richiesta: "+ error, undefined) //return values
         } else if(response.body.error){
-            callback("Location non trovata", undefined) //return values
+            callback("Città non trovata", undefined) //return values
         } else {
             callback(undefined, response.body)
         }
