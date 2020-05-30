@@ -1,28 +1,28 @@
-const spinner = document.querySelector("#loading-spinner")
-const resultDiv = document.querySelector("#result")
-const cityInput = document.querySelector("#city")
+const city_form = document.querySelector("form")
+const city_input = document.querySelector("#city")
+const spinner_anim = document.querySelector("#loading-spinner")
+const result_div = document.querySelector("#result")
 
-cityInput.focus();
+city_input.focus();
 
-function getData(){
+city_form.addEventListener("submit", (event) => {
+    event.preventDefault() //prevent the form to refresh the page
 
-    const urlAddress = "/weather?address="+ cityInput.value //prendi input dal form
+    result_div.classList.add("d-none")
+    spinner_anim.classList.remove("d-none")
 
-    resultDiv.classList.add("d-none")
-    spinner.classList.remove("d-none")
+    const urlAddress = "/weather?address="+ city_input.value //prendi input dal form
 
     fetch(urlAddress).then((response) => { //promise per chiamata ad API interna
         response.json().then((data) => { //parse dati dal json di risposta
             if(data.error){
-                resultDiv.innerHTML = "<p class='my-5 error'>"+data.error+"</p>"
+                result_div.innerHTML = "<p class='my-5 error'>"+data.error+"</p>"
             }
             if(data.temperature){
-                resultDiv.innerHTML = "<p class='my-5 display-1'>"+data.temperature+"°</p>"
+                result_div.innerHTML = "<p class='my-5 display-1'>"+data.temperature+"°</p>"
             }
-            resultDiv.classList.remove("d-none")
-            spinner.classList.add("d-none")
+            result_div.classList.remove("d-none")
+            spinner_anim.classList.add("d-none")
         })
     })
-    return false
-}
-
+})
