@@ -4,6 +4,7 @@ const hbs = require("hbs")
 const weatherRequest = require("./utils/weatherRequest")
 
 const app = express()
+const port = process.env.PORT || 3000 //heroku port OR local port
 
 app.set("view engine","hbs") // set the render engine
 app.set("views", path.join(__dirname, "../views")); //set the view folder
@@ -57,6 +58,6 @@ app.get("*", (req, res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log("Server is running.")
+app.listen(port, () => {
+    console.log("Server is running on port " + port)
 })
