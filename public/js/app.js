@@ -13,16 +13,19 @@ city_form.addEventListener("submit", (event) => {
 
     const urlAddress = "/weather?address="+ city_input.value //prendi input dal form
 
-    fetch(urlAddress).then((response) => { //promise per chiamata ad API interna
-        response.json().then((data) => { //parse dati dal json di risposta
-            if(data.error){
-                result_div.innerHTML = "<p class='my-5 error'>"+data.error+"</p>"
-            }
-            if(data.temperature){
-                result_div.innerHTML = "<p class='my-5 display-1'>"+data.temperature+"°</p>"
-            }
-            result_div.classList.remove("d-none")
-            spinner_anim.classList.add("d-none")
-        })
-    })
+    const getData = async () => {
+        const response = await fetch(urlAddress)
+        const data = await response.json()
+        if(data.error){
+            result_div.innerHTML = "<p class='my-5 error'>"+data.error+"</p>"
+        }
+        if(data.temperature){
+            result_div.innerHTML = "<p class='my-5 display-1'>"+data.temperature+"°</p>"
+        }
+        result_div.classList.remove("d-none")
+        spinner_anim.classList.add("d-none")
+    }
+
+    getData()
+
 })
