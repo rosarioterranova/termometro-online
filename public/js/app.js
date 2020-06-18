@@ -31,9 +31,6 @@ termometro.controller('mainController', function($scope, $http) {
     $scope.getTemperature = () =>{
         result_div.classList.add("d-none")
         spinner_anim.classList.remove("d-none")
-    
-        //TODO: translate $scope.cityInput to english
-
         getWeather($scope.cityInput, $http, result_div, spinner_anim)
     }
 })

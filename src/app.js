@@ -1,6 +1,7 @@
 const path = require("path")
 const express = require("express")
 const getWeather = require("./utils/weatherRequest")
+const translate = require('translate-google')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -15,8 +16,8 @@ app.get("/weather", async (req, res) => {
     if(!req.query.address){
         return res.send({ error: "Nessuna città inserita" })
     }
-
-    const result = await getWeather(req.query.address)
+    const cityName =  await translate(req.query.address, {from: 'it', to: 'en'})
+    const result = await getWeather(cityName)
     if(result.current){
         res.send({
             address: result.location.name,
