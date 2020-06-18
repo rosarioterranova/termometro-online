@@ -1,56 +1,32 @@
 const path = require("path")
 const express = require("express")
-const hbs = require("hbs")
-const weatherRequest = require("./utils/weatherRequest")
+const getWeather = require("./utils/weatherRequest")
 
 const app = express()
-const port = process.env.PORT || 3000 //heroku port OR local port
+const port = process.env.PORT || 3000
 
-app.set("view engine","hbs") // set the render engine
-app.set("views", path.join(__dirname, "../views")); //set the view folder
-hbs.registerPartials(path.join(__dirname, "../views/partials")); //set the partials folder
-app.use(express.static(path.join(__dirname, "../public"))) //set the public folder
+app.use(express.static(path.join(__dirname, "../public")))
 
-// index
 app.get("/", (req, res) => {
-    res.render("index", {
-        title: "Termometro Online",
-    })
+    res.send("index")
 })
 
-// about
-app.get("/about", (req, res) => {
-    res.render("about", {
-        title: "Info"
-    })
-})
-
-// help
-app.get("/help", (req, res) => {
-    res.render("help", {
-        title: "Aiuto"
-    })
-})
-
-// weather (sending an object will send a JSON)
-app.get("/weather", (req, res) => {
+app.get("/weather", async (req, res) => {
     if(!req.query.address){
         return res.send({ error: "Nessuna città inserita" })
     }
 
-    weatherRequest.getWeather(req.query.address, (error, data) => {
-        if(error){
-            res.send({ error: error })
-        } else {
-            res.send({
-                address: data.location.name,
-                temperature: data.current.temperature
-            })
-        }
-    })
+    const result = await getWeather(req.query.address)
+    if(result.current){
+        res.send({
+            address: result.location.name,
+            temperature: result.current.temperature
+        })
+    } else {
+        res.send({ error: result })
+    }
 })
 
-// 404
 app.get("*", (req, res) => {
     res.render("404", {
         title: "404",
