@@ -1,17 +1,20 @@
+termometro.component("navBar", {
+    templateUrl: "components/navBar.html"
+})
+
 termometro.component("temperatureQuery", {
     templateUrl: "components/temperatureQuery.html",
-    controller: function($scope, $http){
-        const city_form = document.querySelector("form")
+    controller: function($http){
         const city_input = document.querySelector("#city")
         const spinner_anim = document.querySelector("#loading-spinner")
         const result_div = document.querySelector("#result")
 
         city_input.focus();
         
-        $scope.getTemperature = () =>{
+        this.getTemperature = () =>{
             result_div.classList.add("d-none")
             spinner_anim.classList.remove("d-none")
-            getWeather($scope.cityInput, $http, result_div, spinner_anim)
+            getWeather(this.cityInput, $http, result_div, spinner_anim)
         }
     }
 })
