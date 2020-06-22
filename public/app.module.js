@@ -1,4 +1,4 @@
-const termometro = angular.module('termometro', ["ngRoute"]) 
+const termometro = angular.module('termometro', ["ngRoute", "navBar", "temperatureQuery"]) 
 
 termometro.config(function($locationProvider, $routeProvider){
     $locationProvider.hashPrefix(''); //remove the hash-bang

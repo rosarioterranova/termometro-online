@@ -1,9 +1,5 @@
-termometro.component("navBar", {
-    templateUrl: "components/navBar.html"
-})
-
-termometro.component("temperatureQuery", {
-    templateUrl: "components/temperatureQuery.html",
+temperatureQuery.component("temperatureQuery", {
+    templateUrl: "components/temperature-query/temperature-query.template.html",
     controller: function($http){
         const city_input = document.querySelector("#city")
         const spinner_anim = document.querySelector("#loading-spinner")
