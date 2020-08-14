@@ -1,7 +1,5 @@
 # Termometro Online
 
-App sviluppata in NodeJS con Express framework, AngularJS e utilizzo delle [API WeatherSkack](https://weatherstack.com/)
+App sviluppata in PHP + JQUERY
 
 Inserisci il nome della città come input e premi invio!
-
-Attenzione: il nome delle città deve essere in inglese.
