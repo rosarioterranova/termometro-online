@@ -1,19 +1,20 @@
-$(document).ready(function() {
-    $('#city-submit').submit(function(e) {
-        e.preventDefault();
-        $("#result").addClass("d-none");
-        $("#loading-spinner").removeClass("d-none");
-        $.ajax({
-            type: "GET",
-            url: 'weather.php',
-            data: $(this).serialize(),
-            success: function(response)
-            {
-                var jsonData = JSON.parse(response);
-                $("#loading-spinner").addClass("d-none");
-                $("#result").removeClass("d-none");
-                $("#result").html(jsonData.current.temperature+"°");
-           }
-       });
-     });
-});
+const submitBtn = document.querySelector("#submit-btn")
+const resultDiv = document.querySelector("#result")
+const loadingSpinner = document.querySelector("#loading-spinner")
+const cityInput = document.querySelector("#city")
+
+submitBtn.addEventListener("click", async (e) =>{
+    e.preventDefault();
+    resultDiv.classList.add("d-none")
+    loadingSpinner.classList.remove("d-none")
+    const response = await getWeather(cityInput.value)
+    resultDiv.classList.remove("d-none")
+    resultDiv.innerHTML = response.current.temperature+"°"
+    loadingSpinner.classList.add("d-none")
+})
+
+const getWeather = async (city) =>{
+    const response = await fetch("/weather.php?city="+city)
+    const data = await response.json()
+    return data
+}
